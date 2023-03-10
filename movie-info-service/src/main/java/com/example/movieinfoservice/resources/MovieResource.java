@@ -55,18 +55,13 @@ public class MovieResource {
     @RequestMapping("/{movieId}")
     public Movie getMovieInfo(@PathVariable("movieId") String movieId) {
         Movie CachedData = getCachedData(movieId);
-        if (CachedData != null) {
-
+        if (CachedData != null)
             return CachedData;
-        }
+
         // Get the movie info from TMDB
         final String url = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=" + apiKey;
         MovieSummary movieSummary = restTemplate.getForObject(url, MovieSummary.class);
-
-        System.out.println(movieSummary);
-
         cacheData(movieId, movieSummary.getTitle(), movieSummary.getOverview());
-
         return getCachedData(movieId);
     }
 }
