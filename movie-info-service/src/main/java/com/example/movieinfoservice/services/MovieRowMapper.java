@@ -9,7 +9,7 @@ public class MovieRowMapper {
 
     public Movie getMovie(Document doc){
         Movie movie = new Movie();
-        movie.setMovieId(doc.getString("movie_id"));
+        movie.setMovieId(doc.getString("movieId"));
         movie.setName(doc.getString("name"));
         movie.setDescription(doc.getString("description"));
         return movie;
