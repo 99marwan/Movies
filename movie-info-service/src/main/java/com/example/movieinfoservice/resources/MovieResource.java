@@ -28,14 +28,17 @@ public class MovieResource {
 
     @RequestMapping("/{movieId}")
     public Movie getMovieInfo(@PathVariable("movieId") String movieId) {
-        Object CachedData = cacheService.getCachedData(movieId);
+        Movie CachedData = cacheService.getCachedData(movieId);
         if (CachedData != null) {
-            return;
+            
+            return CachedData;
         }
         // Get the movie info from TMDB
         final String url = "https://api.themoviedb.org/3/movie/" + movieId + "?api_key=" + apiKey;
         MovieSummary movieSummary = restTemplate.getForObject(url, MovieSummary.class);
+        
+        cacheService.cacheData(movieId, movieSummary.getTitle(), movieSummary.getOverview());
 
-        return new Movie(movieId, movieSummary.getTitle(), movieSummary.getOverview());
+        return cacheService.getCachedData(movieId);
     }
 }
