@@ -4,15 +4,16 @@ option java_multiple_files =  true;
 
 message topMovies {
     string movieId = 1;
-    int64 ranting = 2;
+    string title = 2;
+    string description = 3;
+    double rating = 4;
 }
 
 message request{
-    topMovies movie = 1;
 }
 
 message response{
-    string result = 1;
+    repeated topMovies movie = 1;
 }
 
 service topMoviesService{
