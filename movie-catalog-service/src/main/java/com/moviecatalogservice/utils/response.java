@@ -16,7 +16,7 @@ public final class response extends
   }
 
   private response() {
-    result_ = "";
+    movie_ = java.util.Collections.emptyList();
   }
 
   @java.lang.Override
@@ -45,9 +45,12 @@ public final class response extends
             break;
           }
           case 10: {
-            java.lang.String s = input.readStringRequireUtf8();
-
-            result_ = s;
+            if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+              movie_ = new java.util.ArrayList<topMovies>();
+              mutable_bitField0_ |= 0x00000001;
+            }
+            movie_.add(
+                input.readMessage(topMovies.parser(), extensionRegistry));
             break;
           }
         }
@@ -58,6 +61,9 @@ public final class response extends
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
+      if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+        movie_ = java.util.Collections.unmodifiableList(movie_);
+      }
       makeExtensionsImmutable();
     }
   }
@@ -72,37 +78,43 @@ public final class response extends
             response.class, response.Builder.class);
   }
 
-  public static final int RESULT_FIELD_NUMBER = 1;
-  private volatile java.lang.Object result_;
+  public static final int MOVIE_FIELD_NUMBER = 1;
+  private java.util.List<topMovies> movie_;
 
   /**
-   * <code>string result = 1;</code>
+   * <code>repeated .topMovies movie = 1;</code>
    */
-  public java.lang.String getResult() {
-    java.lang.Object ref = result_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      result_ = s;
-      return s;
-    }
+  public java.util.List<topMovies> getMovieList() {
+    return movie_;
   }
 
   /**
-   * <code>string result = 1;</code>
+   * <code>repeated .topMovies movie = 1;</code>
    */
-  public com.google.protobuf.ByteString getResultBytes() {
-    java.lang.Object ref = result_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = com.google.protobuf.ByteString.copyFromUtf8(
-          (java.lang.String) ref);
-      result_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public java.util.List<? extends topMoviesOrBuilder> getMovieOrBuilderList() {
+    return movie_;
+  }
+
+  /**
+   * <code>repeated .topMovies movie = 1;</code>
+   */
+  public int getMovieCount() {
+    return movie_.size();
+  }
+
+  /**
+   * <code>repeated .topMovies movie = 1;</code>
+   */
+  public topMovies getMovie(int index) {
+    return movie_.get(index);
+  }
+
+  /**
+   * <code>repeated .topMovies movie = 1;</code>
+   */
+  public topMoviesOrBuilder getMovieOrBuilder(
+      int index) {
+    return movie_.get(index);
   }
 
   private byte memoizedIsInitialized = -1;
@@ -120,8 +132,8 @@ public final class response extends
 
   public void writeTo(com.google.protobuf.CodedOutputStream output)
       throws java.io.IOException {
-    if (!getResultBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, result_);
+    for (int i = 0; i < movie_.size(); i++) {
+      output.writeMessage(1, movie_.get(i));
     }
   }
 
@@ -131,8 +143,9 @@ public final class response extends
       return size;
 
     size = 0;
-    if (!getResultBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, result_);
+    for (int i = 0; i < movie_.size(); i++) {
+      size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, movie_.get(i));
     }
     memoizedSize = size;
     return size;
@@ -151,8 +164,8 @@ public final class response extends
     response other = (response) obj;
 
     boolean result = true;
-    result = result && getResult()
-        .equals(other.getResult());
+    result = result && getMovieList()
+        .equals(other.getMovieList());
     return result;
   }
 
@@ -163,8 +176,10 @@ public final class response extends
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + RESULT_FIELD_NUMBER;
-    hash = (53 * hash) + getResult().hashCode();
+    if (getMovieCount() > 0) {
+      hash = (37 * hash) + MOVIE_FIELD_NUMBER;
+      hash = (53 * hash) + getMovieList().hashCode();
+    }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -306,13 +321,18 @@ public final class response extends
 
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders) {
+        getMovieFieldBuilder();
       }
     }
 
     public Builder clear() {
       super.clear();
-      result_ = "";
-
+      if (movieBuilder_ == null) {
+        movie_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+      } else {
+        movieBuilder_.clear();
+      }
       return this;
     }
 
@@ -334,7 +354,16 @@ public final class response extends
 
     public response buildPartial() {
       response result = new response(this);
-      result.result_ = result_;
+      int from_bitField0_ = bitField0_;
+      if (movieBuilder_ == null) {
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          movie_ = java.util.Collections.unmodifiableList(movie_);
+          bitField0_ = (bitField0_ & ~0x00000001);
+        }
+        result.movie_ = movie_;
+      } else {
+        result.movie_ = movieBuilder_.build();
+      }
       onBuilt();
       return result;
     }
@@ -383,9 +412,30 @@ public final class response extends
     public Builder mergeFrom(response other) {
       if (other == response.getDefaultInstance())
         return this;
-      if (!other.getResult().isEmpty()) {
-        result_ = other.result_;
-        onChanged();
+      if (movieBuilder_ == null) {
+        if (!other.movie_.isEmpty()) {
+          if (movie_.isEmpty()) {
+            movie_ = other.movie_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+          } else {
+            ensureMovieIsMutable();
+            movie_.addAll(other.movie_);
+          }
+          onChanged();
+        }
+      } else {
+        if (!other.movie_.isEmpty()) {
+          if (movieBuilder_.isEmpty()) {
+            movieBuilder_.dispose();
+            movieBuilder_ = null;
+            movie_ = other.movie_;
+            bitField0_ = (bitField0_ & ~0x00000001);
+            movieBuilder_ = com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ? getMovieFieldBuilder()
+                : null;
+          } else {
+            movieBuilder_.addAllMessages(other.movie_);
+          }
+        }
       }
       onChanged();
       return this;
@@ -413,75 +463,259 @@ public final class response extends
       return this;
     }
 
-    private java.lang.Object result_ = "";
+    private int bitField0_;
+
+    private java.util.List<topMovies> movie_ = java.util.Collections.emptyList();
+
+    private void ensureMovieIsMutable() {
+      if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+        movie_ = new java.util.ArrayList<topMovies>(movie_);
+        bitField0_ |= 0x00000001;
+      }
+    }
+
+    private com.google.protobuf.RepeatedFieldBuilderV3<topMovies, topMovies.Builder, topMoviesOrBuilder> movieBuilder_;
 
     /**
-     * <code>string result = 1;</code>
+     * <code>repeated .topMovies movie = 1;</code>
      */
-    public java.lang.String getResult() {
-      java.lang.Object ref = result_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        result_ = s;
-        return s;
+    public java.util.List<topMovies> getMovieList() {
+      if (movieBuilder_ == null) {
+        return java.util.Collections.unmodifiableList(movie_);
       } else {
-        return (java.lang.String) ref;
+        return movieBuilder_.getMessageList();
       }
     }
 
     /**
-     * <code>string result = 1;</code>
+     * <code>repeated .topMovies movie = 1;</code>
      */
-    public com.google.protobuf.ByteString getResultBytes() {
-      java.lang.Object ref = result_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = com.google.protobuf.ByteString.copyFromUtf8(
-            (java.lang.String) ref);
-        result_ = b;
-        return b;
+    public int getMovieCount() {
+      if (movieBuilder_ == null) {
+        return movie_.size();
       } else {
-        return (com.google.protobuf.ByteString) ref;
+        return movieBuilder_.getCount();
       }
     }
 
     /**
-     * <code>string result = 1;</code>
+     * <code>repeated .topMovies movie = 1;</code>
      */
-    public Builder setResult(
-        java.lang.String value) {
-      if (value == null) {
-        throw new NullPointerException();
+    public topMovies getMovie(int index) {
+      if (movieBuilder_ == null) {
+        return movie_.get(index);
+      } else {
+        return movieBuilder_.getMessage(index);
       }
+    }
 
-      result_ = value;
-      onChanged();
+    /**
+     * <code>repeated .topMovies movie = 1;</code>
+     */
+    public Builder setMovie(
+        int index, topMovies value) {
+      if (movieBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureMovieIsMutable();
+        movie_.set(index, value);
+        onChanged();
+      } else {
+        movieBuilder_.setMessage(index, value);
+      }
       return this;
     }
 
     /**
-     * <code>string result = 1;</code>
+     * <code>repeated .topMovies movie = 1;</code>
      */
-    public Builder clearResult() {
-
-      result_ = getDefaultInstance().getResult();
-      onChanged();
+    public Builder setMovie(
+        int index, topMovies.Builder builderForValue) {
+      if (movieBuilder_ == null) {
+        ensureMovieIsMutable();
+        movie_.set(index, builderForValue.build());
+        onChanged();
+      } else {
+        movieBuilder_.setMessage(index, builderForValue.build());
+      }
       return this;
     }
 
     /**
-     * <code>string result = 1;</code>
+     * <code>repeated .topMovies movie = 1;</code>
      */
-    public Builder setResultBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-        throw new NullPointerException();
+    public Builder addMovie(topMovies value) {
+      if (movieBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureMovieIsMutable();
+        movie_.add(value);
+        onChanged();
+      } else {
+        movieBuilder_.addMessage(value);
       }
-      checkByteStringIsUtf8(value);
-
-      result_ = value;
-      onChanged();
       return this;
+    }
+
+    /**
+     * <code>repeated .topMovies movie = 1;</code>
+     */
+    public Builder addMovie(
+        int index, topMovies value) {
+      if (movieBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureMovieIsMutable();
+        movie_.add(index, value);
+        onChanged();
+      } else {
+        movieBuilder_.addMessage(index, value);
+      }
+      return this;
+    }
+
+    /**
+     * <code>repeated .topMovies movie = 1;</code>
+     */
+    public Builder addMovie(
+        topMovies.Builder builderForValue) {
+      if (movieBuilder_ == null) {
+        ensureMovieIsMutable();
+        movie_.add(builderForValue.build());
+        onChanged();
+      } else {
+        movieBuilder_.addMessage(builderForValue.build());
+      }
+      return this;
+    }
+
+    /**
+     * <code>repeated .topMovies movie = 1;</code>
+     */
+    public Builder addMovie(
+        int index, topMovies.Builder builderForValue) {
+      if (movieBuilder_ == null) {
+        ensureMovieIsMutable();
+        movie_.add(index, builderForValue.build());
+        onChanged();
+      } else {
+        movieBuilder_.addMessage(index, builderForValue.build());
+      }
+      return this;
+    }
+
+    /**
+     * <code>repeated .topMovies movie = 1;</code>
+     */
+    public Builder addAllMovie(
+        java.lang.Iterable<? extends topMovies> values) {
+      if (movieBuilder_ == null) {
+        ensureMovieIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, movie_);
+        onChanged();
+      } else {
+        movieBuilder_.addAllMessages(values);
+      }
+      return this;
+    }
+
+    /**
+     * <code>repeated .topMovies movie = 1;</code>
+     */
+    public Builder clearMovie() {
+      if (movieBuilder_ == null) {
+        movie_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000001);
+        onChanged();
+      } else {
+        movieBuilder_.clear();
+      }
+      return this;
+    }
+
+    /**
+     * <code>repeated .topMovies movie = 1;</code>
+     */
+    public Builder removeMovie(int index) {
+      if (movieBuilder_ == null) {
+        ensureMovieIsMutable();
+        movie_.remove(index);
+        onChanged();
+      } else {
+        movieBuilder_.remove(index);
+      }
+      return this;
+    }
+
+    /**
+     * <code>repeated .topMovies movie = 1;</code>
+     */
+    public topMovies.Builder getMovieBuilder(
+        int index) {
+      return getMovieFieldBuilder().getBuilder(index);
+    }
+
+    /**
+     * <code>repeated .topMovies movie = 1;</code>
+     */
+    public topMoviesOrBuilder getMovieOrBuilder(
+        int index) {
+      if (movieBuilder_ == null) {
+        return movie_.get(index);
+      } else {
+        return movieBuilder_.getMessageOrBuilder(index);
+      }
+    }
+
+    /**
+     * <code>repeated .topMovies movie = 1;</code>
+     */
+    public java.util.List<? extends topMoviesOrBuilder> getMovieOrBuilderList() {
+      if (movieBuilder_ != null) {
+        return movieBuilder_.getMessageOrBuilderList();
+      } else {
+        return java.util.Collections.unmodifiableList(movie_);
+      }
+    }
+
+    /**
+     * <code>repeated .topMovies movie = 1;</code>
+     */
+    public topMovies.Builder addMovieBuilder() {
+      return getMovieFieldBuilder().addBuilder(
+          topMovies.getDefaultInstance());
+    }
+
+    /**
+     * <code>repeated .topMovies movie = 1;</code>
+     */
+    public topMovies.Builder addMovieBuilder(
+        int index) {
+      return getMovieFieldBuilder().addBuilder(
+          index, topMovies.getDefaultInstance());
+    }
+
+    /**
+     * <code>repeated .topMovies movie = 1;</code>
+     */
+    public java.util.List<topMovies.Builder> getMovieBuilderList() {
+      return getMovieFieldBuilder().getBuilderList();
+    }
+
+    private com.google.protobuf.RepeatedFieldBuilderV3<topMovies, topMovies.Builder, topMoviesOrBuilder> getMovieFieldBuilder() {
+      if (movieBuilder_ == null) {
+        movieBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<topMovies, topMovies.Builder, topMoviesOrBuilder>(
+            movie_,
+            ((bitField0_ & 0x00000001) == 0x00000001),
+            getParentForChildren(),
+            isClean());
+        movie_ = null;
+      }
+      return movieBuilder_;
     }
 
     public final Builder setUnknownFields(

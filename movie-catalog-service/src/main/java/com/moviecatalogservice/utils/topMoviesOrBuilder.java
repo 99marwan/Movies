@@ -4,21 +4,41 @@ package com.moviecatalogservice.utils;
 // source: Movies.proto
 
 public interface topMoviesOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:topMovies)
-    com.google.protobuf.MessageOrBuilder {
+        // @@protoc_insertion_point(interface_extends:topMovies)
+        com.google.protobuf.MessageOrBuilder {
 
-  /**
-   * <code>string movieId = 1;</code>
-   */
-  java.lang.String getMovieId();
+    /**
+     * <code>string movieId = 1;</code>
+     */
+    java.lang.String getMovieId();
 
-  /**
-   * <code>string movieId = 1;</code>
-   */
-  com.google.protobuf.ByteString getMovieIdBytes();
+    /**
+     * <code>string movieId = 1;</code>
+     */
+    com.google.protobuf.ByteString getMovieIdBytes();
 
-  /**
-   * <code>int64 ranting = 2;</code>
-   */
-  long getRanting();
+    /**
+     * <code>string title = 2;</code>
+     */
+    java.lang.String getTitle();
+
+    /**
+     * <code>string title = 2;</code>
+     */
+    com.google.protobuf.ByteString getTitleBytes();
+
+    /**
+     * <code>string description = 3;</code>
+     */
+    java.lang.String getDescription();
+
+    /**
+     * <code>string description = 3;</code>
+     */
+    com.google.protobuf.ByteString getDescriptionBytes();
+
+    /**
+     * <code>double rating = 4;</code>
+     */
+    double getRating();
 }

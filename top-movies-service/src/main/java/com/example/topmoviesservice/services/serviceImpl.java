@@ -33,17 +33,12 @@ public class serviceImpl extends topMoviesServiceGrpc.topMoviesServiceImplBase {
          */
         // HttpEntity<MovieSummary> entity = new HttpEntity<>(new MovieSummary());
 
-        /*
-         * final String url =
-         * "https://api.themoviedb.org/3/movie/top_rated?api_key=b0af84324ea41ca39f4311c9156e94e3";
-         * MovieSummaryList movieSummary =
-         * restTemplate.getForObject(url,MovieSummaryList.class);
-         * 
-         * response resp =
-         * response.newBuilder().setResult(movieSummary.getString()).build();
-         * responseObserver.onNext(resp);
-         * responseObserver.onCompleted();
-         */
+        final String url = "https://api.themoviedb.org/3/movie/top_rated?api_key=b0af84324ea41ca39f4311c9156e94e3";
+        MovieSummaryList movieSummary = restTemplate.getForObject(url,MovieSummaryList.class);
+
+        response resp = movieSummary.toResponse();
+        responseObserver.onNext(resp);
+        responseObserver.onCompleted();
     }
 
 }

@@ -15,7 +15,7 @@ import io.grpc.ServerBuilder;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableCircuitBreaker
-public class RatingsDataServiceApplication {
+public class TopMoviesServiceApplication {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 

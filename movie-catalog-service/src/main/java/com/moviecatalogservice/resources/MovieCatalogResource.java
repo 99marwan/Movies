@@ -7,6 +7,7 @@ import com.moviecatalogservice.models.UserRating;
 import com.moviecatalogservice.services.MovieInfoService;
 import com.moviecatalogservice.services.TopMoviesService;
 import com.moviecatalogservice.services.UserRatingService;
+import com.moviecatalogservice.utils.topMovies;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,7 +56,7 @@ public class MovieCatalogResource {
     }
 
     @RequestMapping("/top_ten_movies")
-    public String getTopTenMovies() {
+    public List<Movie> getTopTenMovies() {
         return topMoviesService.getTopTen();
     }
 

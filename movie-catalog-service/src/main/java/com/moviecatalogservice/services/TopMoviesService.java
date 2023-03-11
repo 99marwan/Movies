@@ -15,7 +15,9 @@ import com.moviecatalogservice.utils.response;
 import com.moviecatalogservice.utils.topMovies;
 import com.moviecatalogservice.utils.topMoviesServiceGrpc;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -29,14 +31,23 @@ public class TopMoviesService {
         this.restTemplate = restTemplate;
     }
 
-    public String getTopTen() {
+    public List<Movie> getTopTen() {
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8090)
             .usePlaintext()
             .build();
         topMoviesServiceGrpc.topMoviesServiceBlockingStub stub = topMoviesServiceGrpc.newBlockingStub(channel);
         request req = request.newBuilder().build();
         response resp = stub.requestTopMovies(req);
+
+        List<Movie> movies = new ArrayList<>();
+        for (topMovies movie : resp.getMovieList()) {
+            Movie movieMovie = new Movie();
+            movieMovie.setMovieId(movie.getMovieId());
+            movieMovie.setName(movie.getTitle());
+            movieMovie.setDescription(movie.getDescription());
+            movies.add(movieMovie);
+        }
         
-        return resp.getResult();
+        return movies;
     }
 }

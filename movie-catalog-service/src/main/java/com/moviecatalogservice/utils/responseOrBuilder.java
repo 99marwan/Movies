@@ -4,16 +4,32 @@ package com.moviecatalogservice.utils;
 // source: Movies.proto
 
 public interface responseOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:response)
-    com.google.protobuf.MessageOrBuilder {
+        // @@protoc_insertion_point(interface_extends:response)
+        com.google.protobuf.MessageOrBuilder {
 
-  /**
-   * <code>string result = 1;</code>
-   */
-  java.lang.String getResult();
+    /**
+     * <code>repeated .topMovies movie = 1;</code>
+     */
+    java.util.List<topMovies> getMovieList();
 
-  /**
-   * <code>string result = 1;</code>
-   */
-  com.google.protobuf.ByteString getResultBytes();
+    /**
+     * <code>repeated .topMovies movie = 1;</code>
+     */
+    topMovies getMovie(int index);
+
+    /**
+     * <code>repeated .topMovies movie = 1;</code>
+     */
+    int getMovieCount();
+
+    /**
+     * <code>repeated .topMovies movie = 1;</code>
+     */
+    java.util.List<? extends topMoviesOrBuilder> getMovieOrBuilderList();
+
+    /**
+     * <code>repeated .topMovies movie = 1;</code>
+     */
+    topMoviesOrBuilder getMovieOrBuilder(
+            int index);
 }

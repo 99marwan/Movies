@@ -4,21 +4,6 @@ package com.moviecatalogservice.utils;
 // source: Movies.proto
 
 public interface requestOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:request)
-    com.google.protobuf.MessageOrBuilder {
-
-  /**
-   * <code>.topMovies movie = 1;</code>
-   */
-  boolean hasMovie();
-
-  /**
-   * <code>.topMovies movie = 1;</code>
-   */
-  topMovies getMovie();
-
-  /**
-   * <code>.topMovies movie = 1;</code>
-   */
-  topMoviesOrBuilder getMovieOrBuilder();
+        // @@protoc_insertion_point(interface_extends:request)
+        com.google.protobuf.MessageOrBuilder {
 }

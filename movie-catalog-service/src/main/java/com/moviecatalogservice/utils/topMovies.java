@@ -17,7 +17,9 @@ public final class topMovies extends
 
   private topMovies() {
     movieId_ = "";
-    ranting_ = 0L;
+    title_ = "";
+    description_ = "";
+    rating_ = 0D;
   }
 
   @java.lang.Override
@@ -51,9 +53,21 @@ public final class topMovies extends
             movieId_ = s;
             break;
           }
-          case 16: {
+          case 18: {
+            java.lang.String s = input.readStringRequireUtf8();
 
-            ranting_ = input.readInt64();
+            title_ = s;
+            break;
+          }
+          case 26: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            description_ = s;
+            break;
+          }
+          case 33: {
+
+            rating_ = input.readDouble();
             break;
           }
         }
@@ -111,14 +125,80 @@ public final class topMovies extends
     }
   }
 
-  public static final int RANTING_FIELD_NUMBER = 2;
-  private long ranting_;
+  public static final int TITLE_FIELD_NUMBER = 2;
+  private volatile java.lang.Object title_;
 
   /**
-   * <code>int64 ranting = 2;</code>
+   * <code>string title = 2;</code>
    */
-  public long getRanting() {
-    return ranting_;
+  public java.lang.String getTitle() {
+    java.lang.Object ref = title_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      title_ = s;
+      return s;
+    }
+  }
+
+  /**
+   * <code>string title = 2;</code>
+   */
+  public com.google.protobuf.ByteString getTitleBytes() {
+    java.lang.Object ref = title_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = com.google.protobuf.ByteString.copyFromUtf8(
+          (java.lang.String) ref);
+      title_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int DESCRIPTION_FIELD_NUMBER = 3;
+  private volatile java.lang.Object description_;
+
+  /**
+   * <code>string description = 3;</code>
+   */
+  public java.lang.String getDescription() {
+    java.lang.Object ref = description_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      description_ = s;
+      return s;
+    }
+  }
+
+  /**
+   * <code>string description = 3;</code>
+   */
+  public com.google.protobuf.ByteString getDescriptionBytes() {
+    java.lang.Object ref = description_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = com.google.protobuf.ByteString.copyFromUtf8(
+          (java.lang.String) ref);
+      description_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int RATING_FIELD_NUMBER = 4;
+  private double rating_;
+
+  /**
+   * <code>double rating = 4;</code>
+   */
+  public double getRating() {
+    return rating_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -139,8 +219,14 @@ public final class topMovies extends
     if (!getMovieIdBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 1, movieId_);
     }
-    if (ranting_ != 0L) {
-      output.writeInt64(2, ranting_);
+    if (!getTitleBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, title_);
+    }
+    if (!getDescriptionBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, description_);
+    }
+    if (rating_ != 0D) {
+      output.writeDouble(4, rating_);
     }
   }
 
@@ -153,9 +239,15 @@ public final class topMovies extends
     if (!getMovieIdBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, movieId_);
     }
-    if (ranting_ != 0L) {
+    if (!getTitleBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, title_);
+    }
+    if (!getDescriptionBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, description_);
+    }
+    if (rating_ != 0D) {
       size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, ranting_);
+          .computeDoubleSize(4, rating_);
     }
     memoizedSize = size;
     return size;
@@ -176,7 +268,12 @@ public final class topMovies extends
     boolean result = true;
     result = result && getMovieId()
         .equals(other.getMovieId());
-    result = result && (getRanting() == other.getRanting());
+    result = result && getTitle()
+        .equals(other.getTitle());
+    result = result && getDescription()
+        .equals(other.getDescription());
+    result = result && (java.lang.Double.doubleToLongBits(getRating()) == java.lang.Double.doubleToLongBits(
+        other.getRating()));
     return result;
   }
 
@@ -189,9 +286,13 @@ public final class topMovies extends
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + MOVIEID_FIELD_NUMBER;
     hash = (53 * hash) + getMovieId().hashCode();
-    hash = (37 * hash) + RANTING_FIELD_NUMBER;
+    hash = (37 * hash) + TITLE_FIELD_NUMBER;
+    hash = (53 * hash) + getTitle().hashCode();
+    hash = (37 * hash) + DESCRIPTION_FIELD_NUMBER;
+    hash = (53 * hash) + getDescription().hashCode();
+    hash = (37 * hash) + RATING_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getRanting());
+        java.lang.Double.doubleToLongBits(getRating()));
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -340,7 +441,11 @@ public final class topMovies extends
       super.clear();
       movieId_ = "";
 
-      ranting_ = 0L;
+      title_ = "";
+
+      description_ = "";
+
+      rating_ = 0D;
 
       return this;
     }
@@ -364,7 +469,9 @@ public final class topMovies extends
     public topMovies buildPartial() {
       topMovies result = new topMovies(this);
       result.movieId_ = movieId_;
-      result.ranting_ = ranting_;
+      result.title_ = title_;
+      result.description_ = description_;
+      result.rating_ = rating_;
       onBuilt();
       return result;
     }
@@ -417,8 +524,16 @@ public final class topMovies extends
         movieId_ = other.movieId_;
         onChanged();
       }
-      if (other.getRanting() != 0L) {
-        setRanting(other.getRanting());
+      if (!other.getTitle().isEmpty()) {
+        title_ = other.title_;
+        onChanged();
+      }
+      if (!other.getDescription().isEmpty()) {
+        description_ = other.description_;
+        onChanged();
+      }
+      if (other.getRating() != 0D) {
+        setRating(other.getRating());
       }
       onChanged();
       return this;
@@ -517,31 +632,173 @@ public final class topMovies extends
       return this;
     }
 
-    private long ranting_;
+    private java.lang.Object title_ = "";
 
     /**
-     * <code>int64 ranting = 2;</code>
+     * <code>string title = 2;</code>
      */
-    public long getRanting() {
-      return ranting_;
+    public java.lang.String getTitle() {
+      java.lang.Object ref = title_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        title_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
     }
 
     /**
-     * <code>int64 ranting = 2;</code>
+     * <code>string title = 2;</code>
      */
-    public Builder setRanting(long value) {
+    public com.google.protobuf.ByteString getTitleBytes() {
+      java.lang.Object ref = title_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = com.google.protobuf.ByteString.copyFromUtf8(
+            (java.lang.String) ref);
+        title_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
 
-      ranting_ = value;
+    /**
+     * <code>string title = 2;</code>
+     */
+    public Builder setTitle(
+        java.lang.String value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+
+      title_ = value;
       onChanged();
       return this;
     }
 
     /**
-     * <code>int64 ranting = 2;</code>
+     * <code>string title = 2;</code>
      */
-    public Builder clearRanting() {
+    public Builder clearTitle() {
 
-      ranting_ = 0L;
+      title_ = getDefaultInstance().getTitle();
+      onChanged();
+      return this;
+    }
+
+    /**
+     * <code>string title = 2;</code>
+     */
+    public Builder setTitleBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      checkByteStringIsUtf8(value);
+
+      title_ = value;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object description_ = "";
+
+    /**
+     * <code>string description = 3;</code>
+     */
+    public java.lang.String getDescription() {
+      java.lang.Object ref = description_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs = (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        description_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+
+    /**
+     * <code>string description = 3;</code>
+     */
+    public com.google.protobuf.ByteString getDescriptionBytes() {
+      java.lang.Object ref = description_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = com.google.protobuf.ByteString.copyFromUtf8(
+            (java.lang.String) ref);
+        description_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    /**
+     * <code>string description = 3;</code>
+     */
+    public Builder setDescription(
+        java.lang.String value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+
+      description_ = value;
+      onChanged();
+      return this;
+    }
+
+    /**
+     * <code>string description = 3;</code>
+     */
+    public Builder clearDescription() {
+
+      description_ = getDefaultInstance().getDescription();
+      onChanged();
+      return this;
+    }
+
+    /**
+     * <code>string description = 3;</code>
+     */
+    public Builder setDescriptionBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+        throw new NullPointerException();
+      }
+      checkByteStringIsUtf8(value);
+
+      description_ = value;
+      onChanged();
+      return this;
+    }
+
+    private double rating_;
+
+    /**
+     * <code>double rating = 4;</code>
+     */
+    public double getRating() {
+      return rating_;
+    }
+
+    /**
+     * <code>double rating = 4;</code>
+     */
+    public Builder setRating(double value) {
+
+      rating_ = value;
+      onChanged();
+      return this;
+    }
+
+    /**
+     * <code>double rating = 4;</code>
+     */
+    public Builder clearRating() {
+
+      rating_ = 0D;
       onChanged();
       return this;
     }

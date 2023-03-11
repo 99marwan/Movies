@@ -13,11 +13,6 @@ import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncClientStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncBidiStreamingCall;
 import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
-
-// import com.example.topmoviesservice.utils.Movies;
-// import com.example.topmoviesservice.utils.request;
-// import com.example.topmoviesservice.utils.response;
-
 import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
 
 /**
