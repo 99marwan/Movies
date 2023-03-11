@@ -1,0 +1,19 @@
+package com.moviecatalogservice;
+
+import com.moviecatalogservice.utils.request;
+import com.moviecatalogservice.utils.response;
+import com.moviecatalogservice.utils.topMovies;
+import com.moviecatalogservice.utils.topMoviesServiceGrpc;
+
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+
+public class NewGrpcMain {
+    ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8090)
+            .usePlaintext()
+            .build();
+    topMoviesServiceGrpc.topMoviesServiceBlockingStub stub = topMoviesServiceGrpc.newBlockingStub(channel);
+    request req = request.newBuilder().setMovie(topMovies.newBuilder().setMovieId("").setRanting(0).build()).build();
+    response resp = stub.requestTopMovies(req);
+
+}

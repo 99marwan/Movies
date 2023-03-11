@@ -1,0 +1,21 @@
+syntax="proto3";
+
+option java_multiple_files =  true;
+
+message topMovies {
+    string movieId = 1;
+    int ranting = 2;
+}
+
+message request{
+    topMovies movie = 1;
+}
+
+message response{
+    string result = 1;
+}
+
+service topMoviesService{
+    rpc requestTopMovies(request) returns (response);
+}
+
