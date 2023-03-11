@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -39,15 +41,10 @@ public class TopMoviesService {
         request req = request.newBuilder().build();
         response resp = stub.requestTopMovies(req);
 
-        List<Movie> movies = new ArrayList<>();
-        for (topMovies movie : resp.getMovieList()) {
-            Movie movieMovie = new Movie();
-            movieMovie.setMovieId(movie.getMovieId());
-            movieMovie.setName(movie.getTitle());
-            movieMovie.setDescription(movie.getDescription());
-            movies.add(movieMovie);
-        }
-        
+        List<Movie> movies = resp.getMovieList().stream()
+            .map(movie -> new Movie(movie.getMovieId(), movie.getTitle(), movie.getDescription()))
+            .collect(Collectors.toList());
+
         return movies;
     }
 }

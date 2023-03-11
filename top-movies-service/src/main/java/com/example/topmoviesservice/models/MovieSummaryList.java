@@ -1,6 +1,7 @@
 package com.example.topmoviesservice.models;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.example.topmoviesservice.utils.response;
 import com.example.topmoviesservice.utils.topMovies;
@@ -17,21 +18,39 @@ public class MovieSummaryList {
     }
 
     public response toResponse() {
-        response.Builder responseBuilder = response.newBuilder();
+        List<topMovies> topMoviesList = results.stream()
+            .map(summary -> topMovies.newBuilder()
+                    .setMovieId(summary.getId())
+                    .setTitle(summary.getTitle())
+                    .setDescription(summary.getOverview())
+                    .setRating(summary.getVoteAverage())
+                    .build())
+            .limit(10)
+            .collect(Collectors.toList());
 
-        List<MovieSummary> topTenResults = results.subList(0, 10);
-        for (MovieSummary summary : topTenResults) {
-            topMovies.Builder movieBuilder = topMovies.newBuilder();
-            movieBuilder.setMovieId(summary.getId());
-            movieBuilder.setTitle(summary.getTitle());
-            movieBuilder.setDescription(summary.getOverview());
-            movieBuilder.setRating(summary.getVoteAverage());
-
-            responseBuilder.addMovie(movieBuilder.build());
-        }
+        response.Builder responseBuilder = response.newBuilder()
+                .addAllMovie(topMoviesList);
 
         return responseBuilder.build();
+        
     }
+
+    // public response toResponse() {
+        // response.Builder responseBuilder = response.newBuilder();
+
+        // List<MovieSummary> topTenResults = results.subList(0, 10);
+        // for (MovieSummary summary : topTenResults) {
+        //     topMovies.Builder movieBuilder = topMovies.newBuilder();
+        //     movieBuilder.setMovieId(summary.getId());
+        //     movieBuilder.setTitle(summary.getTitle());
+        //     movieBuilder.setDescription(summary.getOverview());
+        //     movieBuilder.setRating(summary.getVoteAverage());
+
+        //     responseBuilder.addMovie(movieBuilder.build());
+        // }
+
+        // return responseBuilder.build();
+    // }
 
     // public String getString(){
     //     StringBuilder stringBuilder = new StringBuilder();
